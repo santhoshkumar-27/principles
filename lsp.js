@@ -1,3 +1,4 @@
+// https://www.freecodecamp.org/news/solid-principles-for-programming-and-software-design/
 /**
  * What is the Liskov Substitution Principle?
 In 1987, the Liskov Substitution Principle (LSP) was introduced by Barbara Liskov in her conference keynote “Data abstraction”. A few years later, she defined the principle like this:
@@ -65,3 +66,55 @@ console.log(square.getArea()); // 25 or 100
 /**
  * You should get 100, because the setWidth(10) is supposed to set both the width and height to 10. But because of the setHeight(5), this will return 25.
  */
+/**
+ * This breaks the LSP. To fix this, there should be a general class for all shapes that will hold all generic methods that you want the objects of your subclasses to have access to. Then for individual methods, you create an individual class for rectangle and square.
+ */
+
+class Shape {
+    setColor(color) {
+        this.color = color;
+    }
+    getColor() {
+        return this.color;
+    }
+}
+
+class Rectangle extends Shape {
+    setWidth(width) {
+        this.width = width;
+    }
+    setHeight(height) {
+        this.height = height;
+    }
+    getArea() {
+        return this.width * this.height;
+    }
+}
+
+class Square extends Shape {
+    setSide(side) {
+        this.side = side;
+    }
+    getArea() {
+        return this.side * this.side;
+    }
+}
+
+/**
+ * This way, you can set the color and get the color using either the super or subclasses:
+ */
+
+// superclass
+let shape = new Shape();
+shape.setColor('red');
+console.log(shape.getColor()); // red
+
+// subclass
+let rectangle1 = new Rectangle();
+rectangle1.setColor('red');
+console.log(rectangle1.getColor()); // red
+
+// subclass
+let square1 = new Square();
+square1.setColor('red');
+console.log(square1.getColor()); // red
