@@ -27,9 +27,16 @@ class ValidatePerson {
             return false;
         }
     }
+}
 
+class DisplayPerson {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+        this.validate = new ValidatePerson(this.name, this.age)
+    }
     Display() {
-        if (this.ValidateName(this.name) && this.ValidateAge(this.age)) {
+        if (this.validate.ValidateName(this.name) && this / validate.ValidateAge(this.age)) {
             console.log(`Name: ${this.name} and Age: ${this.age}`);
         } else {
             console.log('Invalid');
